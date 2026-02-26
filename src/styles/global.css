@@ -26,6 +26,11 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+::selection {
+  background-color: var(--selection-color, #27272a);
+  color: #ffffff;
+}
+
 body {
   min-height: 100dvh;
 }

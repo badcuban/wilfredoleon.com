@@ -105,13 +105,22 @@ const hexColors = [
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 pl-0 md:pl-12">
           {content.projects.map((project, i) => (
             <div class="relative pl-8 border-l border-zinc-800/50 hover:border-zinc-600 transition-colors group">
-              <!-- Status Indicator Cube -->
-              <div class={`absolute -left-[5px] top-2 w-2 h-2 rounded-[2px] ${
-                project.themeColor === "rubiks-red" ? "bg-[var(--color-rubiks-red)]" : 
-                project.themeColor === "rubiks-yellow" ? "bg-[var(--color-rubiks-yellow)]" : 
-                project.themeColor === "rubiks-green" ? "bg-[var(--color-rubiks-green)]" : 
-                "bg-zinc-500"
-              } shadow-[0_0_10px_rgba(255,255,255,0.1)] group-hover:shadow-[0_0_15px_currentColor] transition-shadow`}></div>
+              <!-- Status Indicator 2x2 Cube -->
+              <div class="absolute -left-[7px] top-[6px] w-[10px] h-[10px] grid grid-cols-2 gap-[1px] group-hover:rotate-180 transition-transform duration-700 ease-in-out">
+                {Array.from({ length: 4 }).map((_, dotI) => {
+                  const defaultColorClass = dotI === 0 
+                    ? (project.themeColor === "rubiks-red" ? "bg-[#B90000]" : 
+                       project.themeColor === "rubiks-yellow" ? "bg-[#FFD500]" : 
+                       project.themeColor === "rubiks-green" ? "bg-[#009B48]" : "bg-zinc-500")
+                    : "bg-zinc-800";
+                  return (
+                    <div 
+                      class={`w-full h-full rounded-[1px] transition-colors duration-700 ${defaultColorClass} group-hover:bg-[var(--hover-c)] shadow-[0_0_10px_rgba(255,255,255,0.1)] group-hover:shadow-[0_0_15px_var(--hover-c)]`}
+                      style={`--hover-c: ${hexColors[(i + dotI + 1) % 5]};`}
+                    ></div>
+                  );
+                })}
+              </div>
               
               <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
                 {project.link && project.link !== "#" ? (
@@ -473,12 +482,47 @@ const hexColors = [
       scene.add(cubeGroup);
 
       // Animation loop
+      let baseRotationX = 0;
+      let baseRotationY = 0;
+      let targetMouseX = 0;
+      let targetMouseY = 0;
+      let mouseX = 0;
+      let mouseY = 0;
+
+      // Mouse tracking
+      const onMouseMove = (event) => {
+        const windowHalfX = window.innerWidth / 2;
+        const windowHalfY = window.innerHeight / 2;
+        targetMouseX = (event.clientX - windowHalfX) / windowHalfX;
+        targetMouseY = (event.clientY - windowHalfY) / windowHalfY;
+      };
+      
+      // Scroll tracking for mobile feel
+      const onScroll = () => {
+        if (window.matchMedia('(hover: none)').matches) {
+          const scrolled = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight || 1);
+          // Map scroll 0 -> 1 to mouseY -1 -> 1
+          targetMouseY = (scrolled - 0.5) * 2;
+        }
+      };
+
+      document.addEventListener('mousemove', onMouseMove, { passive: true });
+      document.addEventListener('scroll', onScroll, { passive: true });
+
       function animate() {
         requestAnimationFrame(animate);
 
-        // Rotate the entire group
-        cubeGroup.rotation.x += 0.001815;
-        cubeGroup.rotation.y += 0.0027225;
+        // Smoothly interpolate current mouse values towards targets
+        mouseX += (targetMouseX - mouseX) * 0.05;
+        mouseY += (targetMouseY - mouseY) * 0.05;
+
+        // Base continuous rotation
+        baseRotationX += 0.001815;
+        baseRotationY += 0.0027225;
+
+        // Add mouse/scroll influence (tilt up to 0.5 radians)
+        cubeGroup.rotation.x = baseRotationX + (mouseY * 0.5);
+        cubeGroup.rotation.y = baseRotationY + (mouseX * 0.5);
 
         renderer.render(scene, camera);
       }
@@ -496,7 +540,20 @@ const hexColors = [
     }
 
     // Initialize immediately (Astro module scripts are deferred, so DOM is already parsed)
+    const setupSelectionColors = () => {
+      // Exclude white to keep text highly legible
+      const selectionColors = ["#B90000", "#0045AD", "#FF5900", "#009B48", "#FFD500"];
+      const updateSelectionColor = () => {
+        const randomColor = selectionColors[Math.floor(Math.random() * selectionColors.length)];
+        document.documentElement.style.setProperty('--selection-color', randomColor);
+      };
+      
+      document.addEventListener('mousedown', updateSelectionColor, { passive: true });
+      document.addEventListener('touchstart', updateSelectionColor, { passive: true });
+    };
+
     setupInteractiveLogo();
     initCube();
+    setupSelectionColors();
   </script>
 </BaseLayout>
