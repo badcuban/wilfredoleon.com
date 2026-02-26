@@ -26,9 +26,9 @@ export interface SiteContent {
 const content: SiteContent = {
   name: "Wilfredo Leon",
   shortName: "Will",
-  tagline: "I build things at the intersection of code and domain expertise.",
+  tagline: "Technician, developer, and the kind of person who speedsolves cubes for fun.",
   about:
-    "Developer and entrepreneur who turns deep domain knowledge into real products. I run FACP Manuals LLC, build trading tools, and occasionally take on client projects when the fit is right. I care more about solving real problems than chasing trends.",
+    "Fire alarm technician and self-taught developer. I started building websites because I wanted to, and I kept going because I couldn't stop. FACP Manuals is my main thing, a reference platform for fire alarm pros with a searchable manual library and an AI troubleshooter I'm pretty proud of. I co-founded Project Trade too, where I write the code and my partner calls the trades. I love new tech, I love solving problems, and I love Rubik's cubes. Still figuring the rest out.",
   projects: [
     {
       title: "FACP Manuals",
@@ -57,7 +57,7 @@ const content: SiteContent = {
       themeColor: "rubiks-green",
     },
   ],
-  now: "Currently building Project Trade and growing FACP Manuals. Always tinkering with new ideas.",
+  now: "All in on FACP Manuals right now. More manuals, better tools, and pushing the AI troubleshooter further. Project Trade is still cooking. Probably gaming or solving a cube somewhere in between.",
   contact: [
     {
       label: "GitHub",
