@@ -14,8 +14,8 @@ const hexColors = [
 ---
 
 <BaseLayout
-  title="Wilfredo Leon — Developer & Entrepreneur"
-  description="Wilfredo Leon — Fire alarm technician and self-taught developer. Creator of FACP Manuals, co-founder of Project Trade, and Rubik's cube speedsolver."
+  title="Wilfredo Leon — Fire Alarm Tech & Web Developer"
+  description="Wilfredo Leon — Fire alarm technician and self-taught web developer. Creator of FACP Manuals, a fire alarm documentation platform with an AI troubleshooting tool. Co-founder of Project Trade."
   bodyClass="bg-zinc-950 text-zinc-300 font-sans selection:bg-zinc-800 selection:text-white min-h-screen"
 >
   <!-- Background Grid Pattern -->
@@ -132,6 +132,21 @@ const hexColors = [
                 })}
               </div>
               
+              <div class="flex items-center gap-3 mb-1">
+                <span class="inline-flex items-center gap-1.5 text-[10px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-[2px] border border-zinc-800 bg-zinc-900/50 text-zinc-400">
+                  <span class="relative flex h-1.5 w-1.5 items-center justify-center">
+                    {project.status === "live" && (
+                      <span class="absolute inline-flex h-full w-full animate-ping rounded-[1px] bg-[#009B48] opacity-75"></span>
+                    )}
+                    <span class={`relative inline-flex h-1.5 w-1.5 rounded-[1px] ${
+                      project.status === "live" 
+                        ? 'bg-[#009B48] shadow-[0_0_8px_#009B48]' 
+                        : 'bg-[#FFD500] shadow-[0_0_4px_#FFD500]'
+                    }`}></span>
+                  </span>
+                  {project.status === "live" ? "Live" : "In Dev"}
+                </span>
+              </div>
               <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
                 {project.link && project.link !== "#" ? (
                   <a 
@@ -146,12 +161,53 @@ const hexColors = [
                     </svg>
                   </a>
                 ) : (
-                  project.title
+                  <span class="italic">{project.title}</span>
                 )}
               </h3>
-              <p class="text-sm sm:text-base md:text-lg text-zinc-400 mb-8 font-light leading-relaxed">
+              <p class="text-sm sm:text-base md:text-lg text-zinc-400 mb-6 font-light leading-relaxed">
                 {project.description}
               </p>
+
+              {project.links && project.links.length > 0 && (
+                <div class="flex flex-wrap gap-3 mb-6 mt-2">
+                  {project.links.map((pl) => {
+                    const isAI = pl.label.toLowerCase().includes('ai');
+                    const hoverGlow = project.themeColor === "rubiks-red" ? "group-hover/btn:shadow-[0_0_15px_rgba(185,0,0,0.2)] group-hover/btn:border-[#B90000]/50" : 
+                                      project.themeColor === "rubiks-yellow" ? "group-hover/btn:shadow-[0_0_15px_rgba(255,213,0,0.2)] group-hover/btn:border-[#FFD500]/50" : 
+                                      project.themeColor === "rubiks-green" ? "group-hover/btn:shadow-[0_0_15px_rgba(0,155,72,0.2)] group-hover/btn:border-[#009B48]/50" : "group-hover/btn:border-zinc-500";
+                    const iconColorClass = project.themeColor === "rubiks-red" ? "text-[#B90000]" : 
+                                           project.themeColor === "rubiks-yellow" ? "text-[#FFD500]" : 
+                                           project.themeColor === "rubiks-green" ? "text-[#009B48]" : "text-zinc-500";
+                    const hoverIconColor = project.themeColor === "rubiks-red" ? "group-hover/btn:text-[#B90000]" : 
+                                           project.themeColor === "rubiks-yellow" ? "group-hover/btn:text-[#FFD500]" : 
+                                           project.themeColor === "rubiks-green" ? "group-hover/btn:text-[#009B48]" : "group-hover/btn:text-white";
+
+                    return (
+                      <a
+                        href={pl.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class={`group/btn relative overflow-hidden text-xs font-bold tracking-widest uppercase px-4 py-2 rounded-[2px] border border-zinc-800 bg-zinc-900/50 text-zinc-400 hover:text-white transition-all duration-500 flex items-center gap-2 ${hoverGlow}`}
+                      >
+                        {isAI && (
+                          <span class="absolute inset-0 w-full h-full -translate-x-full group-hover/btn:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none"></span>
+                        )}
+                        <span class="relative z-10 flex items-center gap-2">
+                          {isAI && (
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class={`${iconColorClass} group-hover/btn:rotate-90 transition-transform duration-700 ease-in-out`}>
+                              <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                            </svg>
+                          )}
+                          {pl.label}
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class={`opacity-50 group-hover/btn:opacity-100 transition-colors duration-300 ${hoverIconColor}`}>
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                          </svg>
+                        </span>
+                      </a>
+                    );
+                  })}
+                </div>
+              )}
               
               <div class="flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
@@ -316,6 +372,9 @@ const hexColors = [
       85% { transform: translate(-100%, 0); opacity: 0; }
       86% { transform: translate(100%, 0); opacity: 0; }
       95%, 100% { transform: translate(0, 0); opacity: 1; }
+    }
+    @keyframes shimmer {
+      100% { transform: translateX(100%); }
     }
   </style>
 

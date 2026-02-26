@@ -1,8 +1,14 @@
+export interface ProjectLink {
+  label: string;
+  url: string;
+}
+
 export interface Project {
   title: string;
   description: string;
   status: "live" | "in-development" | "case-study";
   link?: string;
+  links?: ProjectLink[];
   tags: string[];
   themeColor?: "rubiks-red" | "rubiks-blue" | "rubiks-orange" | "rubiks-green" | "rubiks-yellow" | "rubiks-white";
 }
@@ -33,17 +39,20 @@ const content: SiteContent = {
     {
       title: "FACP Manuals",
       description:
-        "The go-to reference platform for fire alarm professionals. Hosts a searchable manual library for panels from Notifier, Simplex, Edwards, Siemens, and more — plus identification guides to help technicians find the right documentation fast.",
+        "I built this because I was tired of digging through filing cabinets for panel manuals. It's a searchable library for fire alarm documentation covering Notifier, Simplex, Edwards, Siemens, and more. Users can create accounts, earn contribution points on the community leaderboard, and use an AI troubleshooting chat that sources directly from indexed manuals and always links back to the exact page.",
       status: "live",
       link: "https://facpmanuals.com/",
-      tags: ["Fire Alarm", "Documentation", "LLC", "AI Troubleshooter"],
+      links: [
+        { label: "Try the AI Troubleshooter", url: "https://facpmanuals.com/ask-ai" },
+      ],
+      tags: ["Fire Alarm", "Next.js", "Supabase", "AWS S3", "AI Troubleshooter"],
       themeColor: "rubiks-red",
     },
     {
       title: "Adrian Fish Express",
       description:
-        "E-commerce overnight seafood shipping. Built the full Shopify store from scratch — custom theme, plugin setup, and complete storefront.",
-      status: "case-study",
+        "E-commerce store for overnight seafood shipping. Built the full Shopify storefront from scratch, including custom theme work and plugin setup.",
+      status: "live",
       link: "https://adrianfishexpress.com",
       tags: ["Shopify", "E-commerce", "Client Work"],
       themeColor: "rubiks-yellow",
@@ -51,9 +60,9 @@ const content: SiteContent = {
     {
       title: "Project Trade",
       description:
-        "A day-trading alert system that watches stocks on 15-minute candles, evaluates setups using Bollinger Bands, EMAs, and volume analysis, then fires alerts. Built with Next.js, Vercel, and Alpaca Markets API.",
+        "A day-trading alert system I'm co-building with a partner. He handles the trading strategy, I build the tech. The system watches stocks on 15-minute candles, evaluates setups, and fires alerts. Built with Next.js, Vercel, and Alpaca Markets API.",
       status: "in-development",
-      tags: ["Trading", "Next.js", "Alpaca API", "Automation"],
+      tags: ["Co-founded", "Trading", "Next.js", "Alpaca API"],
       themeColor: "rubiks-green",
     },
   ],

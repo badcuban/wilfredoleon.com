@@ -9,7 +9,7 @@ interface Props {
 
 const {
   title,
-  description = "Wilfredo Leon — Fire alarm technician and self-taught developer. Creator of FACP Manuals, co-founder of Project Trade, and Rubik's cube speedsolver.",
+  description = "Wilfredo Leon — Fire alarm technician and self-taught web developer. Creator of FACP Manuals, a fire alarm documentation platform with an AI troubleshooting tool. Co-founder of Project Trade.",
   bodyClass = "",
 } = Astro.props;
 
@@ -23,6 +23,8 @@ const canonicalURL = new URL(Astro.url.pathname, "https://wilfredoleon.com");
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="description" content={description} />
     <meta name="author" content="Wilfredo Leon" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="robots" content="index, follow" />
 
     <link rel="canonical" href={canonicalURL.href} />
 
@@ -33,7 +35,7 @@ const canonicalURL = new URL(Astro.url.pathname, "https://wilfredoleon.com");
     <meta property="og:site_name" content="Wilfredo Leon" />
     <meta property="og:locale" content="en_US" />
 
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
 
@@ -41,15 +43,38 @@ const canonicalURL = new URL(Astro.url.pathname, "https://wilfredoleon.com");
 
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Wilfredo Leon",
-      "url": "https://wilfredoleon.com",
-      "jobTitle": "Developer & Entrepreneur",
-      "sameAs": [
-        "https://github.com/badcuban",
-        "https://www.twitch.tv/badcuban"
-      ],
-      "knowsAbout": ["Software Development", "Fire Alarm Systems", "E-commerce", "Trading Systems"]
+      "@type": "ProfilePage",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "Wilfredo Leon",
+        "alternateName": "Will",
+        "url": "https://wilfredoleon.com",
+        "jobTitle": "Fire Alarm Technician",
+        "description": "Fire alarm technician and self-taught web developer. Creator of FACP Manuals and co-founder of Project Trade.",
+        "sameAs": [
+          "https://github.com/badcuban",
+          "https://www.twitch.tv/badcuban"
+        ],
+        "knowsAbout": [
+          "Web Development",
+          "Fire Alarm Systems",
+          "FACP Documentation",
+          "Next.js",
+          "Astro",
+          "Supabase",
+          "AI Troubleshooting Tools",
+          "Shopify",
+          "E-commerce"
+        ],
+        "owns": {
+          "@type": "WebApplication",
+          "name": "FACP Manuals",
+          "url": "https://facpmanuals.com",
+          "description": "Searchable fire alarm documentation library with an AI-powered troubleshooting tool for fire alarm technicians.",
+          "applicationCategory": "Reference",
+          "operatingSystem": "Web"
+        }
+      }
     })} />
 
     <title>{title}</title>
