@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Inter Variable";
+  src: url("@fontsource-variable/inter/files/inter-latin-wght-normal.woff2")
+    format("woff2-variations");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: "Inter Variable", system-ui, sans-serif;
+
+  /* Rubik's Cube Theme Colors */
+  --color-rubiks-red: #B90000;
+  --color-rubiks-blue: #0045AD;
+  --color-rubiks-orange: #FF5900;
+  --color-rubiks-green: #009B48;
+  --color-rubiks-yellow: #FFD500;
+  --color-rubiks-white: #FFFFFF;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+}
