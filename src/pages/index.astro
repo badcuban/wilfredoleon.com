@@ -108,22 +108,25 @@ const hexColors = [
               <!-- Status Indicator 2x2 Cube -->
               <div class="absolute -left-[7px] top-[6px] w-[10px] h-[10px] grid grid-cols-2 gap-[1px] group-hover:rotate-180 transition-transform duration-700 ease-in-out">
                 {Array.from({ length: 4 }).map((_, dotI) => {
-                  const defaultColorClass = dotI === 0 
+                  const targetDot = project.themeColor === "rubiks-red" ? 0 : 
+                                    project.themeColor === "rubiks-yellow" ? 1 : 
+                                    project.themeColor === "rubiks-green" ? 3 : 0;
+                  const isColored = dotI === targetDot;
+                  
+                  const colorClass = isColored 
                     ? (project.themeColor === "rubiks-red" ? "bg-[#B90000]" : 
                        project.themeColor === "rubiks-yellow" ? "bg-[#FFD500]" : 
                        project.themeColor === "rubiks-green" ? "bg-[#009B48]" : "bg-zinc-500")
                     : "bg-zinc-800";
                   
-                  const hoverHex = dotI === 0
-                    ? (project.themeColor === "rubiks-red" ? "#B90000" : 
-                       project.themeColor === "rubiks-yellow" ? "#FFD500" : 
-                       project.themeColor === "rubiks-green" ? "#009B48" : "#71717a")
-                    : hexColors[(i + dotI + 1) % 5];
+                  const glowColor = project.themeColor === "rubiks-red" ? "#B90000" : 
+                                    project.themeColor === "rubiks-yellow" ? "#FFD500" : 
+                                    project.themeColor === "rubiks-green" ? "#009B48" : "#71717a";
 
                   return (
                     <div 
-                      class={`w-full h-full rounded-[1px] transition-colors duration-700 ${defaultColorClass} group-hover:bg-[var(--hover-c)] shadow-[0_0_10px_rgba(255,255,255,0.1)] group-hover:shadow-[0_0_15px_var(--hover-c)]`}
-                      style={`--hover-c: ${hoverHex};`}
+                      class={`w-full h-full rounded-[1px] transition-shadow duration-700 ${colorClass} ${isColored ? 'shadow-[0_0_10px_rgba(255,255,255,0.1)] group-hover:shadow-[0_0_15px_var(--glow-c)]' : ''}`}
+                      style={isColored ? `--glow-c: ${glowColor};` : undefined}
                     ></div>
                   );
                 })}
