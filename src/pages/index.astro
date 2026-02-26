@@ -214,7 +214,9 @@ const hexColors = [
 
   <style>
     /* CSS for Interactive Logo Animation */
-    .play-anim { }
+    .play-anim > div:not(.bg-white) {
+      background-color: var(--c) !important;
+    }
 
     .play-anim .logo-dot-0 { animation: moveDot0 4s ease-in-out; }
     .play-anim .logo-dot-1 { animation: moveDot1 4s ease-in-out; }
@@ -355,7 +357,10 @@ const hexColors = [
           dots[8].style.setProperty('--c', c6);
         }, 3420); // 85.5% of 4000ms
 
-        setTimeout(() => { animCooldown = false; }, 4000);
+        setTimeout(() => { 
+          animCooldown = false; 
+          logoGrid.classList.remove('play-anim');
+        }, 4000);
       };
       
       logoGrid.addEventListener('mouseenter', triggerAnim);
