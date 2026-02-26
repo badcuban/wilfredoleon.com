@@ -113,10 +113,17 @@ const hexColors = [
                        project.themeColor === "rubiks-yellow" ? "bg-[#FFD500]" : 
                        project.themeColor === "rubiks-green" ? "bg-[#009B48]" : "bg-zinc-500")
                     : "bg-zinc-800";
+                  
+                  const hoverHex = dotI === 0
+                    ? (project.themeColor === "rubiks-red" ? "#B90000" : 
+                       project.themeColor === "rubiks-yellow" ? "#FFD500" : 
+                       project.themeColor === "rubiks-green" ? "#009B48" : "#71717a")
+                    : hexColors[(i + dotI + 1) % 5];
+
                   return (
                     <div 
                       class={`w-full h-full rounded-[1px] transition-colors duration-700 ${defaultColorClass} group-hover:bg-[var(--hover-c)] shadow-[0_0_10px_rgba(255,255,255,0.1)] group-hover:shadow-[0_0_15px_var(--hover-c)]`}
-                      style={`--hover-c: ${hexColors[(i + dotI + 1) % 5]};`}
+                      style={`--hover-c: ${hoverHex};`}
                     ></div>
                   );
                 })}
