@@ -20,7 +20,7 @@ const canonicalURL = new URL(Astro.url.pathname, "https://wilfredoleon.com");
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="description" content={description} />
     <meta name="author" content="Wilfredo Leon" />
 
@@ -56,5 +56,9 @@ const canonicalURL = new URL(Astro.url.pathname, "https://wilfredoleon.com");
   </head>
   <body class={bodyClass}>
     <slot />
+    <script>
+      import { inject } from '@vercel/analytics';
+      inject();
+    </script>
   </body>
 </html>

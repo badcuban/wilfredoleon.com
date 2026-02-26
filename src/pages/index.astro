@@ -21,7 +21,7 @@ const hoverColors = [
   <!-- Background Grid Pattern -->
   <div class="fixed inset-0 z-[-1] opacity-5 pointer-events-none" style="background-image: linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px); background-size: 40px 40px;"></div>
 
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800/50">
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800/50 transform-gpu">
     <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
       <a href="#hero" class="flex items-center gap-3 group cursor-pointer no-underline">
         <!-- Mini 3x3 Grid Logo -->
@@ -191,7 +191,7 @@ const hoverColors = [
   </main>
 
   <!-- Mobile Bottom Nav -->
-  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-zinc-950/90 backdrop-blur-md border-t border-zinc-800/50 pb-safe">
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-zinc-950/90 backdrop-blur-md border-t border-zinc-800/50 transform-gpu" style="padding-bottom: env(safe-area-inset-bottom, 0px);">
     <div class="flex items-center justify-around px-4 py-4 text-[10px] font-bold tracking-widest uppercase">
       {
         [
@@ -233,20 +233,27 @@ const hoverColors = [
   <script>
     import * as THREE from 'three';
 
-    // Interactive Logo Animation trigger
     const setupInteractiveLogo = () => {
       const logoGrid = document.getElementById('header-logo-grid');
       if (!logoGrid) return;
       
+      let animCooldown = false;
+
       const triggerAnim = () => {
-        // Reset animation by removing and re-adding class
+        if (animCooldown) return;
+        animCooldown = true;
         logoGrid.classList.remove('play-anim');
-        void logoGrid.offsetWidth; // Trigger reflow
+        void logoGrid.offsetWidth;
         logoGrid.classList.add('play-anim');
+        setTimeout(() => { animCooldown = false; }, 1800);
       };
       
       logoGrid.addEventListener('mouseenter', triggerAnim);
       logoGrid.addEventListener('touchstart', triggerAnim, { passive: true });
+
+      if (window.matchMedia('(hover: none)').matches) {
+        window.addEventListener('scroll', triggerAnim, { passive: true });
+      }
     };
 
     function initCube() {
