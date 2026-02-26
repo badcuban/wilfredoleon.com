@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#09090b" />
+
+  <!-- Grid Pattern (Opacity 5%) -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-width="1" stroke-opacity="0.05" />
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#grid)" />
+
+  <!-- Giant 3x3 Rubik's Cube Logo -->
+  <g transform="translate(110, 165)">
+    <!-- Top Row: 0 4 0 -->
+    <rect x="0" y="0" width="80" height="80" rx="16" fill="#B90000" />
+    <rect x="90" y="0" width="80" height="80" rx="16" fill="#FFD500" />
+    <rect x="180" y="0" width="80" height="80" rx="16" fill="#B90000" />
+    
+    <!-- Middle Row: 6 X 2 -->
+    <rect x="0" y="90" width="80" height="80" rx="16" fill="#009B48" />
+    <rect x="90" y="90" width="80" height="80" rx="16" fill="#FFFFFF" />
+    <rect x="180" y="90" width="80" height="80" rx="16" fill="#0045AD" />
+    
+    <!-- Bottom Row: 5 0 2 (2025 -> 5) -->
+    <rect x="0" y="180" width="80" height="80" rx="16" fill="#FFD500" />
+    <rect x="90" y="180" width="80" height="80" rx="16" fill="#B90000" />
+    <rect x="180" y="180" width="80" height="80" rx="16" fill="#FFD500" />
+  </g>
+
+  <!-- Content -->
+  <g transform="translate(420, 260)">
+    <!-- Title -->
+    <text x="0" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="90" font-weight="900" fill="#ffffff" letter-spacing="-2">
+      WILFREDO LEON
+    </text>
+
+    <!-- Decorative Red Line -->
+    <rect x="4" y="40" width="6" height="60" fill="#B90000" />
+
+    <!-- Subtitle -->
+    <text x="32" y="86" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="40" font-weight="300" fill="#a1a1aa" letter-spacing="-0.5">
+      Technician &amp; Developer
+    </text>
+  </g>
+
+  <!-- Bottom Accent / Tagline -->
+  <text x="210" y="520" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="20" font-weight="600" fill="#52525b" letter-spacing="3">
+    FACP MANUALS • PROJECT TRADE • NEXT.JS • SUPABASE
+  </text>
+</svg>

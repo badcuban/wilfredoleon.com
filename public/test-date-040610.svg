@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Date: 0 4 0 6 1 0 -->
+  <!-- We map: 0=Blue, 1=Red, 4=Yellow, 6(Green), padded with Orange for visual balance -->
+  
+  <!-- 0 (Blue), 4 (Yellow), 0 (Blue) -->
+  <rect x="2" y="2" width="8" height="8" rx="2" fill="#0045AD" />
+  <rect x="12" y="2" width="8" height="8" rx="2" fill="#FFD500" />
+  <rect x="22" y="2" width="8" height="8" rx="2" fill="#0045AD" />
+  
+  <!-- 6 (Green), (White Center), 1 (Red) -->
+  <rect x="2" y="12" width="8" height="8" rx="2" fill="#009B48" />
+  <rect x="12" y="12" width="8" height="8" rx="2" fill="#FFFFFF" />
+  <rect x="22" y="12" width="8" height="8" rx="2" fill="#B90000" />
+  
+  <!-- 0 (Blue), Pad (Orange), Pad (Red) -->
+  <rect x="2" y="22" width="8" height="8" rx="2" fill="#0045AD" />
+  <rect x="12" y="22" width="8" height="8" rx="2" fill="#FF5900" />
+  <rect x="22" y="22" width="8" height="8" rx="2" fill="#B90000" />
+</svg>
