@@ -2,14 +2,14 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import content from "../data/content";
 
-// Exact Rubik's cube hover colors (need full class names for Tailwind)
-const hoverColors = [
-  "group-hover:bg-[#B90000]", // UE Red
-  "group-hover:bg-[#0045AD]", // Cobalt Blue
-  "group-hover:bg-[#FF5900]", // Pantone Orange
-  "group-hover:bg-[#009B48]", // Pigment Green
-  "group-hover:bg-[#FFD500]", // Cyber Yellow
-  "group-hover:bg-[#FFFFFF]"  // White
+// Exact Rubik's cube hover colors
+const hexColors = [
+  "#B90000", // UE Red
+  "#0045AD", // Cobalt Blue
+  "#FF5900", // Pantone Orange
+  "#009B48", // Pigment Green
+  "#FFD500", // Cyber Yellow
+  "#FFFFFF"  // White
 ];
 ---
 
@@ -28,8 +28,8 @@ const hoverColors = [
         <div class="grid grid-cols-3 gap-0.5 w-6 h-6" id="header-logo-grid">
           {Array.from({ length: 9 }).map((_, i) => (
             <div 
-              class={`w-full h-full rounded-[2px] ${i === 4 ? 'bg-white' : 'bg-zinc-800'} ${hoverColors[i % 6]} transition-colors duration-300 logo-dot-${i}`}
-              style={`transition-delay: ${i * 50}ms;`}
+              class={`w-full h-full rounded-[2px] ${i === 4 ? 'bg-white' : 'bg-zinc-800 group-hover:bg-[var(--c)]'} transition-colors duration-300 logo-dot-${i}`}
+              style={i !== 4 ? `--c: ${hexColors[i % 6]}` : ''}
             ></div>
           ))}
         </div>
@@ -214,20 +214,88 @@ const hoverColors = [
 
   <style>
     /* CSS for Interactive Logo Animation */
-    .play-anim .logo-dot-0 { animation: pulseRed 1.5s ease-out; }
-    .play-anim .logo-dot-1 { animation: pulseBlue 1.5s ease-out 150ms; }
-    .play-anim .logo-dot-2 { animation: pulseOrange 1.5s ease-out 300ms; }
-    .play-anim .logo-dot-3 { animation: pulseGreen 1.5s ease-out 450ms; }
-    .play-anim .logo-dot-5 { animation: pulseYellow 1.5s ease-out 600ms; }
-    .play-anim .logo-dot-6 { animation: pulseRed 1.5s ease-out 750ms; }
-    .play-anim .logo-dot-7 { animation: pulseBlue 1.5s ease-out 900ms; }
-    .play-anim .logo-dot-8 { animation: pulseOrange 1.5s ease-out 1050ms; }
+    .play-anim { }
 
-    @keyframes pulseRed { 0%, 100% { background-color: #27272a; } 50% { background-color: #B90000; } }
-    @keyframes pulseBlue { 0%, 100% { background-color: #27272a; } 50% { background-color: #0045AD; } }
-    @keyframes pulseOrange { 0%, 100% { background-color: #27272a; } 50% { background-color: #FF5900; } }
-    @keyframes pulseGreen { 0%, 100% { background-color: #27272a; } 50% { background-color: #009B48; } }
-    @keyframes pulseYellow { 0%, 100% { background-color: #27272a; } 50% { background-color: #FFD500; } }
+    .play-anim .logo-dot-0 { animation: moveDot0 4s ease-in-out; }
+    .play-anim .logo-dot-1 { animation: moveDot1 4s ease-in-out; }
+    .play-anim .logo-dot-2 { animation: moveDot2 4s ease-in-out; }
+    .play-anim .logo-dot-3 { animation: moveDot3 4s ease-in-out; }
+    .play-anim .logo-dot-5 { animation: moveDot5 4s ease-in-out; }
+    .play-anim .logo-dot-6 { animation: moveDot6 4s ease-in-out; }
+    .play-anim .logo-dot-7 { animation: moveDot7 4s ease-in-out; }
+    .play-anim .logo-dot-8 { animation: moveDot8 4s ease-in-out; }
+
+    @keyframes moveDot0 {
+      0% { transform: translate(0, 0); opacity: 1; }
+      10% { transform: translate(0, -100%); opacity: 0; }
+      11% { transform: translate(0, 100%); opacity: 0; }
+      20%, 25% { transform: translate(0, 0); opacity: 1; }
+      
+      35% { transform: translate(-100%, 0); opacity: 0; }
+      36% { transform: translate(100%, 0); opacity: 0; }
+      45%, 100% { transform: translate(0, 0); opacity: 1; }
+    }
+
+    @keyframes moveDot1 {
+      0%, 25% { transform: translate(0, 0); opacity: 1; }
+      35% { transform: translate(-100%, 0); opacity: 0; }
+      36% { transform: translate(100%, 0); opacity: 0; }
+      45%, 100% { transform: translate(0, 0); opacity: 1; }
+    }
+
+    @keyframes moveDot2 {
+      0%, 25% { transform: translate(0, 0); opacity: 1; }
+      35% { transform: translate(-100%, 0); opacity: 0; }
+      36% { transform: translate(100%, 0); opacity: 0; }
+      45%, 50% { transform: translate(0, 0); opacity: 1; }
+      
+      60% { transform: translate(0, 100%); opacity: 0; }
+      61% { transform: translate(0, -100%); opacity: 0; }
+      70%, 100% { transform: translate(0, 0); opacity: 1; }
+    }
+
+    @keyframes moveDot3 {
+      0% { transform: translate(0, 0); opacity: 1; }
+      10% { transform: translate(0, -100%); opacity: 0; }
+      11% { transform: translate(0, 100%); opacity: 0; }
+      20%, 100% { transform: translate(0, 0); opacity: 1; }
+    }
+
+    @keyframes moveDot5 {
+      0%, 50% { transform: translate(0, 0); opacity: 1; }
+      60% { transform: translate(0, 100%); opacity: 0; }
+      61% { transform: translate(0, -100%); opacity: 0; }
+      70%, 100% { transform: translate(0, 0); opacity: 1; }
+    }
+
+    @keyframes moveDot6 {
+      0% { transform: translate(0, 0); opacity: 1; }
+      10% { transform: translate(0, -100%); opacity: 0; }
+      11% { transform: translate(0, 100%); opacity: 0; }
+      20%, 75% { transform: translate(0, 0); opacity: 1; }
+      
+      85% { transform: translate(-100%, 0); opacity: 0; }
+      86% { transform: translate(100%, 0); opacity: 0; }
+      95%, 100% { transform: translate(0, 0); opacity: 1; }
+    }
+
+    @keyframes moveDot7 {
+      0%, 75% { transform: translate(0, 0); opacity: 1; }
+      85% { transform: translate(-100%, 0); opacity: 0; }
+      86% { transform: translate(100%, 0); opacity: 0; }
+      95%, 100% { transform: translate(0, 0); opacity: 1; }
+    }
+
+    @keyframes moveDot8 {
+      0%, 50% { transform: translate(0, 0); opacity: 1; }
+      60% { transform: translate(0, 100%); opacity: 0; }
+      61% { transform: translate(0, -100%); opacity: 0; }
+      70%, 75% { transform: translate(0, 0); opacity: 1; }
+      
+      85% { transform: translate(-100%, 0); opacity: 0; }
+      86% { transform: translate(100%, 0); opacity: 0; }
+      95%, 100% { transform: translate(0, 0); opacity: 1; }
+    }
   </style>
 
   <script>
@@ -237,6 +305,7 @@ const hoverColors = [
       const logoGrid = document.getElementById('header-logo-grid');
       if (!logoGrid) return;
       
+      const dots = Array.from({ length: 9 }).map((_, i) => document.querySelector(`.logo-dot-${i}`));
       let animCooldown = false;
 
       const triggerAnim = () => {
@@ -245,7 +314,48 @@ const hoverColors = [
         logoGrid.classList.remove('play-anim');
         void logoGrid.offsetWidth;
         logoGrid.classList.add('play-anim');
-        setTimeout(() => { animCooldown = false; }, 1800);
+        
+        // Phase 1: Left col up
+        setTimeout(() => {
+          const c0 = dots[0].style.getPropertyValue('--c');
+          const c3 = dots[3].style.getPropertyValue('--c');
+          const c6 = dots[6].style.getPropertyValue('--c');
+          dots[0].style.setProperty('--c', c3);
+          dots[3].style.setProperty('--c', c6);
+          dots[6].style.setProperty('--c', c0);
+        }, 420); // 10.5% of 4000ms
+
+        // Phase 2: Top row left
+        setTimeout(() => {
+          const c0 = dots[0].style.getPropertyValue('--c');
+          const c1 = dots[1].style.getPropertyValue('--c');
+          const c2 = dots[2].style.getPropertyValue('--c');
+          dots[0].style.setProperty('--c', c1);
+          dots[1].style.setProperty('--c', c2);
+          dots[2].style.setProperty('--c', c0);
+        }, 1420); // 35.5% of 4000ms
+
+        // Phase 3: Right col down
+        setTimeout(() => {
+          const c2 = dots[2].style.getPropertyValue('--c');
+          const c5 = dots[5].style.getPropertyValue('--c');
+          const c8 = dots[8].style.getPropertyValue('--c');
+          dots[2].style.setProperty('--c', c8);
+          dots[5].style.setProperty('--c', c2);
+          dots[8].style.setProperty('--c', c5);
+        }, 2420); // 60.5% of 4000ms
+
+        // Phase 4: Bottom row left
+        setTimeout(() => {
+          const c6 = dots[6].style.getPropertyValue('--c');
+          const c7 = dots[7].style.getPropertyValue('--c');
+          const c8 = dots[8].style.getPropertyValue('--c');
+          dots[6].style.setProperty('--c', c7);
+          dots[7].style.setProperty('--c', c8);
+          dots[8].style.setProperty('--c', c6);
+        }, 3420); // 85.5% of 4000ms
+
+        setTimeout(() => { animCooldown = false; }, 4000);
       };
       
       logoGrid.addEventListener('mouseenter', triggerAnim);
