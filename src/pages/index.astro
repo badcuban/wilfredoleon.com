@@ -59,18 +59,18 @@ const hexColors = [
   <main class="max-w-5xl mx-auto px-6 pt-32 pb-32">
     
     <!-- Hero -->
-    <section id="hero" class="flex flex-row items-center justify-between gap-4 md:gap-12 pt-8 md:pt-16 mb-24 md:mb-32 scroll-mt-32">
+    <section id="hero" class="flex flex-row items-center justify-between gap-4 md:gap-12 pt-8 md:pt-16 mb-24 md:mb-32 scroll-mt-32 relative">
       <div class="flex-1 relative z-10 w-full text-left">
         <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white mb-4 md:mb-6 uppercase leading-[0.9]">
           {content.name.split(' ')[0]}<br />{content.name.split(' ')[1]}
         </h1>
-        <p class="text-lg sm:text-xl md:text-2xl max-w-xl font-light text-zinc-400 border-l-2 border-[#B90000] pl-4 md:pl-6 py-1 md:py-2 text-left leading-relaxed">
+        <p class="text-lg sm:text-xl md:text-2xl max-w-[180px] sm:max-w-[240px] md:max-w-xl font-light text-zinc-400 border-l-2 border-[#B90000] pl-4 md:pl-6 py-1 md:py-2 text-left leading-relaxed">
           {content.tagline}
         </p>
       </div>
       
       <!-- Three.js Canvas Container -->
-      <div id="cube-canvas-container" class="w-[120px] h-[120px] sm:w-[160px] sm:h-[160px] md:w-[400px] md:h-[400px] flex-shrink-0 relative z-0"></div>
+      <div id="cube-canvas-container" class="absolute right-0 top-1/2 -translate-y-1/2 w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] md:relative md:top-0 md:translate-y-0 md:w-[400px] md:h-[400px] flex-shrink-0 z-0 opacity-40 md:opacity-100 pointer-events-none md:pointer-events-auto"></div>
     </section>
 
     <div class="space-y-32">
@@ -384,7 +384,7 @@ const hexColors = [
       // Adjust camera distance based on screen size so it fits
       const updateCameraZ = () => {
         if (window.innerWidth < 768) {
-          camera.position.z = 5.0; // Adjusted for side-by-side mobile layout
+          camera.position.z = 4.2; // Zoomed in a bit more for mobile so the bigger canvas makes the cube feel huge
         } else {
           camera.position.z = 5.5; // Standard desktop distance
         }
