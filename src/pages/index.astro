@@ -249,72 +249,96 @@ const hexColors = [
           <h2 class="text-sm font-bold tracking-widest uppercase text-white">Contact</h2>
         </div>
         <div class="pl-6 md:pl-12 border-l border-zinc-800/50">
-          <div class="flex flex-wrap gap-8 py-2">
-            {content.contact.map((link) => (
-              <a
-                href={link.url}
-                target={link.icon === "email" ? undefined : "_blank"}
-                rel={link.icon === "email" ? undefined : "noopener noreferrer"}
-                class="text-zinc-400 hover:text-white transition-colors flex items-center gap-3 text-lg"
-              >
-                <span class="w-2 h-2 bg-zinc-700 rounded-sm"></span>
-                {link.label}
-              </a>
-            ))}
-          </div>
+          <div class="flex flex-col md:flex-row gap-12 md:gap-24">
+            <!-- Contact Form -->
+            <form id="contact-form" class="max-w-lg w-full space-y-5">
+              <div>
+                <label for="contact-name" class="block text-xs font-bold tracking-widest uppercase text-zinc-400 mb-2">Name</label>
+                <input
+                  type="text"
+                  id="contact-name"
+                  name="name"
+                  required
+                  autocomplete="name"
+                  class="w-full bg-zinc-900/50 border border-zinc-800 rounded-[2px] px-4 py-3 text-sm text-zinc-300 placeholder-zinc-600 focus:border-[#FF5900] focus:ring-1 focus:ring-[#FF5900]/50 focus:outline-none transition-all"
+                  placeholder="Your name"
+                />
+              </div>
+              <div>
+                <label for="contact-email" class="block text-xs font-bold tracking-widest uppercase text-zinc-400 mb-2">Email</label>
+                <input
+                  type="email"
+                  id="contact-email"
+                  name="email"
+                  required
+                  autocomplete="email"
+                  class="w-full bg-zinc-900/50 border border-zinc-800 rounded-[2px] px-4 py-3 text-sm text-zinc-300 placeholder-zinc-600 focus:border-[#FF5900] focus:ring-1 focus:ring-[#FF5900]/50 focus:outline-none transition-all"
+                  placeholder="your@email.com"
+                />
+              </div>
+              <div>
+                <label for="contact-message" class="block text-xs font-bold tracking-widest uppercase text-zinc-400 mb-2">Message</label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  rows="4"
+                  required
+                  class="w-full bg-zinc-900/50 border border-zinc-800 rounded-[2px] px-4 py-3 text-sm text-zinc-300 placeholder-zinc-600 focus:border-[#FF5900] focus:ring-1 focus:ring-[#FF5900]/50 focus:outline-none transition-all resize-none"
+                  placeholder="What's on your mind?"
+                ></textarea>
+              </div>
+              <div class="flex items-center gap-4">
+                <button
+                  type="submit"
+                  id="contact-submit"
+                  class="group/btn relative overflow-hidden text-xs font-bold tracking-widest uppercase px-6 py-3 rounded-[2px] border border-zinc-800 bg-zinc-900/50 text-zinc-400 hover:text-white transition-all duration-500 flex items-center gap-2 hover:shadow-[0_0_15px_rgba(255,89,0,0.2)] hover:border-[#FF5900]/50 disabled:opacity-50 disabled:pointer-events-none"
+                >
+                  <span id="contact-btn-text" class="relative z-10 flex items-center gap-2">
+                    Send Message
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="opacity-50 group-hover/btn:opacity-100 group-hover/btn:text-[#FF5900] transition-colors duration-300">
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                  </span>
+                </button>
+                <span id="contact-status" class="text-sm hidden"></span>
+              </div>
+            </form>
 
-          <form id="contact-form" class="mt-10 max-w-lg space-y-5">
-            <div>
-              <label for="contact-name" class="block text-xs font-bold tracking-widest uppercase text-zinc-400 mb-2">Name</label>
-              <input
-                type="text"
-                id="contact-name"
-                name="name"
-                required
-                autocomplete="name"
-                class="w-full bg-zinc-900/50 border border-zinc-800 rounded-[2px] px-4 py-3 text-sm text-zinc-300 placeholder-zinc-600 focus:border-[#FF5900] focus:outline-none transition-colors"
-                placeholder="Your name"
-              />
+            <!-- Social Links -->
+            <div class="flex flex-col gap-6 pt-2">
+              <h3 class="text-xs font-bold tracking-widest uppercase text-zinc-500 mb-2">Socials</h3>
+              <div class="flex flex-col gap-4">
+                {content.contact.map((link) => (
+                  <a
+                    href={link.url}
+                    target={link.icon === "email" ? undefined : "_blank"}
+                    rel={link.icon === "email" ? undefined : "noopener noreferrer"}
+                    class="group flex items-center gap-3 text-sm text-zinc-400 hover:text-white transition-colors"
+                  >
+                    <span class="flex items-center justify-center w-8 h-8 rounded-[2px] bg-zinc-900/50 border border-zinc-800 group-hover:border-zinc-600 group-hover:bg-zinc-800 transition-colors">
+                      {link.icon === "github" && (
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                        </svg>
+                      )}
+                      {link.icon === "twitch" && (
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M21 2H3v16h5v4l4-4h5l4-4V2zm-10 9V7m5 4V7"></path>
+                        </svg>
+                      )}
+                      {link.icon === "email" && (
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                          <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                      )}
+                    </span>
+                    <span class="font-medium tracking-wide">{link.label}</span>
+                  </a>
+                ))}
+              </div>
             </div>
-            <div>
-              <label for="contact-email" class="block text-xs font-bold tracking-widest uppercase text-zinc-400 mb-2">Email</label>
-              <input
-                type="email"
-                id="contact-email"
-                name="email"
-                required
-                autocomplete="email"
-                class="w-full bg-zinc-900/50 border border-zinc-800 rounded-[2px] px-4 py-3 text-sm text-zinc-300 placeholder-zinc-600 focus:border-[#FF5900] focus:outline-none transition-colors"
-                placeholder="your@email.com"
-              />
-            </div>
-            <div>
-              <label for="contact-message" class="block text-xs font-bold tracking-widest uppercase text-zinc-400 mb-2">Message</label>
-              <textarea
-                id="contact-message"
-                name="message"
-                rows="4"
-                required
-                class="w-full bg-zinc-900/50 border border-zinc-800 rounded-[2px] px-4 py-3 text-sm text-zinc-300 placeholder-zinc-600 focus:border-[#FF5900] focus:outline-none transition-colors resize-none"
-                placeholder="What's on your mind?"
-              ></textarea>
-            </div>
-            <div class="flex items-center gap-4">
-              <button
-                type="submit"
-                id="contact-submit"
-                class="group/btn relative overflow-hidden text-xs font-bold tracking-widest uppercase px-6 py-3 rounded-[2px] border border-zinc-800 bg-zinc-900/50 text-zinc-400 hover:text-white transition-all duration-500 flex items-center gap-2 hover:shadow-[0_0_15px_rgba(255,89,0,0.2)] hover:border-[#FF5900]/50 disabled:opacity-50 disabled:pointer-events-none"
-              >
-                <span id="contact-btn-text" class="relative z-10 flex items-center gap-2">
-                  Send Message
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="opacity-50 group-hover/btn:opacity-100 group-hover/btn:text-[#FF5900] transition-colors duration-300">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                  </svg>
-                </span>
-              </button>
-              <span id="contact-status" class="text-sm hidden"></span>
-            </div>
-          </form>
+          </div>
         </div>
       </section>
     </div>
