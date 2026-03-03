@@ -9,7 +9,7 @@ interface Props {
 
 const {
   title,
-  description = "Wilfredo Leon — Fire alarm technician and self-taught web developer. Creator of FACP Manuals, a fire alarm documentation platform with an AI troubleshooting tool. Co-founder of Project Trade.",
+  description = "Wilfredo Leon | Fire alarm technician and self-taught web developer. Creator of FACP Manuals, a fire alarm documentation platform with an AI troubleshooting tool. Co-founder of Project Trade.",
   bodyClass = "",
 } = Astro.props;
 
@@ -25,6 +25,7 @@ const canonicalURL = new URL(Astro.url.pathname, "https://wilfredoleon.com");
     <meta name="author" content="Wilfredo Leon" />
     <meta name="theme-color" content="#09090b" />
     <meta name="robots" content="index, follow" />
+    <meta name="keywords" content="Wilfredo Leon, fire alarm technician, web developer, FACP Manuals, fire alarm documentation, AI troubleshooting, Project Trade, Shopify developer, Next.js, Astro" />
 
     <link rel="canonical" href={canonicalURL.href} />
 
@@ -35,6 +36,7 @@ const canonicalURL = new URL(Astro.url.pathname, "https://wilfredoleon.com");
     <meta property="og:site_name" content="Wilfredo Leon" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:image" content="https://wilfredoleon.com/og-image.png" />
+    <meta property="og:image:alt" content="Wilfredo Leon - Fire Alarm Tech & Web Developer" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
 

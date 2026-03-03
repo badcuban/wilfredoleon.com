@@ -99,7 +99,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       to: toEmail,
       from: { email: fromEmail, name: "wilfredoleon.com" },
       replyTo: { email, name },
-      subject: `wilfredoleon.com — ${name}`,
+      subject: `wilfredoleon.com | ${name}`,
       text: `New message via wilfredoleon.com\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
       html: [
         '<div style="font-family:-apple-system,BlinkMacSystemFont,\'Segoe UI\',sans-serif;max-width:560px;margin:0 auto;background:#09090b;border-radius:8px;overflow:hidden">',

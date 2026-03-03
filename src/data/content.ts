@@ -16,7 +16,7 @@ export interface Project {
 export interface ContactLink {
   label: string;
   url: string;
-  icon: "email" | "github" | "twitch";
+  icon: "github" | "twitch";
 }
 
 export interface SiteContent {
