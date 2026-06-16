@@ -700,14 +700,13 @@ const navItems = [
   </script>
 
   <script>
-    async function initContactForm() {
-      try {
-        const { initBotId } = await import("botid");
-        initBotId({ protectedRoutes: ["/api/contact"] });
-      } catch {
-        // BotID unavailable outside Vercel
-      }
+    import { initBotId } from "botid/client/core";
 
+    initBotId({
+      protect: [{ path: "/api/contact", method: "POST" }],
+    });
+
+    async function initContactForm() {
       const form = document.getElementById("contact-form") as HTMLFormElement;
       const btn = document.getElementById("contact-submit") as HTMLButtonElement;
       const btnText = document.getElementById("contact-btn-text") as HTMLSpanElement;
